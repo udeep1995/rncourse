@@ -1,6 +1,14 @@
 import React from "react";
-import { Modal, View, Image, Text, Button, StyleSheet } from "react-native";
-
+import {
+  Modal,
+  View,
+  Image,
+  Text,
+  Button,
+  StyleSheet,
+  TouchableOpacity
+} from "react-native";
+import Icon from "react-native-vector-icons/Ionicons";
 const placeDetail = props => {
   let modalContent = null;
   if (props.selectedPlace) {
@@ -24,9 +32,17 @@ const placeDetail = props => {
     >
       <View style={styles.modalContainer}>
         {modalContent}
-        <View>
-          <Button title="Delete" color="red" onPress={props.onItemDeleted} />
-          <Button title="Close" onPress={props.onModalClosed} />
+        <View style={styles.actions}>
+          <TouchableOpacity onPress={props.onItemDeleted}>
+            <View style={styles.deleteButton}>
+              <Icon size={30} name="md-trash" color="red" />
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={props.onModalClosed}>
+            <View style={styles.closeButton}>
+              <Icon size={30} name="md-close-circle" />
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
     </Modal>
@@ -46,6 +62,18 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     fontSize: 22
+  },
+  deleteButton: {
+    alignItems: "center"
+  },
+  closeButton: {
+    alignItems: "center"
+  },
+  actions: {
+    width: "30%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between"
   }
 });
 
